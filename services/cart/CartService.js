@@ -37,7 +37,7 @@ const CartService = {
                     if (index !== -1) {
                         return {
                             success: false,
-                            message: `Product already added to cart`,
+                            message: `Already added`,
                         }
                     }
                     else {

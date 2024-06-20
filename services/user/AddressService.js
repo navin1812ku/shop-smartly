@@ -21,7 +21,7 @@ const AddressService = {
                 await user.save();
                 return {
                     success: true,
-                    message: `User address added successfully`,
+                    message: `Address added `,
                     user: user
                 }
             }
@@ -60,6 +60,7 @@ const AddressService = {
     },
     updateAddress: async (userId, addressId, address) => {
         try {
+            console.log(addressId, address);
             const user = await User.findById(userId);
             if (!user) {
                 return {
@@ -131,7 +132,7 @@ const AddressService = {
                 const isDefault = user.address.id(addressId).isDefault;
                 user.address.id(addressId).deleteOne();
                 await user.save();
-                console.log(user.address[0]);
+                console.log(user.address);
                 if (isDefault) {
                     user.address[0].set({ isDefault: true });
                     await user.save();
