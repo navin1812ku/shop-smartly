@@ -1,6 +1,7 @@
 const WishList = require('../../models/user/WishList');
 const User = require('../../models/user/User');
 const Product = require('../../models/products/Product');
+const Cart = require('../../models/carts/Cart');
 
 const WishListService = {
     createList: async (userId, wishListName) => {
@@ -87,10 +88,11 @@ const WishListService = {
             }
         }
     },
-    addProduct: async (userId, wishListId, productId) => {
+    addProduct: async (userId, wishListId, productId, cartProductId) => {
         try {
             const user = await User.findById(userId);
             const product = await Product.findById(productId);
+            const cart = await Cart.findById(user.cart);
             const wishList = await WishList.findById(wishListId);
             if (!user) {
                 return {
@@ -109,12 +111,22 @@ const WishListService = {
                     success: false,
                     message: `Wish list not found`
                 }
+            } else if (!cart) {
+                return {
+                    success: false,
+                    message: `Cart not found`
+                }
             }
             else {
+                console.log(cartProductId);
+                console.log(cart);
+                console.log(wishList);
                 wishList.products.push({
                     product: product._id
                 });
                 await wishList.save();
+                cart.products.id(cartProductId).deleteOne();
+                await cart.save();
                 return {
                     success: true,
                     message: `Product added to the list`,

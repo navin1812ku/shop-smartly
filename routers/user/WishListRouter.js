@@ -12,10 +12,11 @@ WishListRouter.post('/user/wishList/:wishListName', verifyToken, verifyRole(['US
     res.json(wishList);
 });
 
-WishListRouter.post('/user/wishList/:wishListId/:productId', verifyToken, verifyRole(['USER']), async (req, res) => {
+WishListRouter.post('/user/wishList', verifyToken, verifyRole(['USER']), async (req, res) => {
     const userId = req.details.id;
-    const { wishListId, productId } = req.params;
-    const wishList = await WishListService.addProduct(userId, wishListId, productId);
+    console.log("I am in");
+    const { listId, productId, cartProductId } = req.body;
+    const wishList = await WishListService.addProduct(userId, listId, productId, cartProductId);
     res.json(wishList);
 });
 
