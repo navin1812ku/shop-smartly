@@ -214,7 +214,7 @@ const WishListService = {
     getUserWishList: async (userId) => {
         try {
             const wishList = await WishList.find({ userId: userId });
-            if (wishList) {
+            if (wishList.length>0) {
                 return {
                     success: true,
                     message: `Fetched wish list`,
