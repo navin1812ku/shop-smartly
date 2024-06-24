@@ -34,8 +34,9 @@ WishListRouter.delete('/user/wishList/:wishListId', verifyToken, verifyRole(['US
     res.json(wishList);
 });
 
-WishListRouter.get('/user/wishListDetsils/:wishListId', verifyToken, verifyRole(['USER']), async (req, res) => {
+WishListRouter.get('/user/wishListById/:wishListId', verifyToken, verifyRole(['USER']), async (req, res) => {
     const { wishListId } = req.params;
+    console.log(wishListId);
     const wishList = await WishListService.getWishList(wishListId);
     res.json(wishList);
 });

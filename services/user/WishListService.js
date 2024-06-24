@@ -62,11 +62,7 @@ const WishListService = {
                 let products = [];
                 for (let product of wishList.products) {
                     const productDetails = await Product.findById(product.product);
-                    products.push({
-                        product: productDetails,
-                        addedAt: product.addedAt,
-                        _id: product._id
-                    });
+                    products.push( productDetails);
                 }
                 const wishListDetails = {
                     _id: wishList._id,
