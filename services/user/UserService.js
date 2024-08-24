@@ -31,6 +31,7 @@ const UserService = {
     getUserDetails: async (userId) => {
         try {
             const userDetails = await User.findById(userId);
+            console.log(userDetails);
             return {
                 success: true,
                 message: `Fetched user details`,
