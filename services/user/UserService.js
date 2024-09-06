@@ -30,7 +30,7 @@ const UserService = {
     },
     getUserDetails: async (userId) => {
         try {
-            const userDetails = await User.findById(userId);
+            const userDetails = User.findById(userId);
             console.log(userId);
             return {
                 success: true,
