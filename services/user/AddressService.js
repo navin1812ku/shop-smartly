@@ -60,7 +60,6 @@ const AddressService = {
     },
     updateAddress: async (userId, addressId, address) => {
         try {
-            console.log(userId, address);
             const user = await User.findById(userId);
             if (!user) {
                 return {
